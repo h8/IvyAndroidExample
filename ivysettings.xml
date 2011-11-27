@@ -1,0 +1,31 @@
+<ivysettings>
+	<property name="repo.dir" value="/var/ivy"/>
+	<resolvers>
+		<ibiblio name="maven2" m2compatible="true" />
+		
+		<url name="acra" m2compatible="true">
+			<artifact
+				pattern="http://acra.googlecode.com/svn/repository/releases/[organization]/[module]/[revision]/[module]-[revision].jar" />
+		</url>
+		
+		<url name="zxing" m2compatible="true">
+			<artifact
+				pattern="http://mvn-adamgent.googlecode.com/svn/maven/release/[organization]/[revision]/[module]-[revision].jar" />
+		</url>
+		
+		<!-- You need a local repo -->
+		<!--<filesystem name="local" m2compatible="true">
+			<ivy pattern="${repo.dir}/[organization]/[module]/[revision]/[artifact].[ext]" />
+			<artifact pattern="${repo.dir}/[organization]/[module]/[revision]/[module].jar" />
+		</filesystem>-->
+		
+		<chain name="chained" returnFirst="true">
+			<resolver ref="maven2" />
+			<resolver ref="acra" />
+			<resolver ref="zxing" />
+			<!--<resolver ref="local" />-->
+		</chain>
+	</resolvers>
+
+	<settings defaultResolver="chained" />
+</ivysettings>

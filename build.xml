@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="IvyAndroidExample" default="help">
+	<loadproperties srcFile="local.properties" />
+	<property file="ant.properties" />
+	<loadproperties srcFile="project.properties" />
+
+	<import file="${sdk.dir}/tools/ant/build.xml" />
+
+	<target name="-pre-build" depends="resolve" />
+
+	<target name="resolve" description="--> retrieve dependencies with ivy">
+		<ivy:retrieve />
+	</target>
+</project>

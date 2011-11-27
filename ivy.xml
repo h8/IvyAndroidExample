@@ -1,0 +1,10 @@
+<ivy-module version="2.0">
+	<info organisation="com.example" module="ivy-android-example" revision="0.1" />
+	<dependencies>
+		<dependency org="org.acra" name="acra" rev="4.2.3" />
+		<dependency org="com.google.inject" name="guice" transitive="false" rev="2.0-no_aop" />
+		<dependency org="org.roboguice" name="roboguice" rev="1.1.2" transitive="false" />
+		<dependency org="com.google.zxing.core" name="core" rev="1.6" />
+		<!--<dependency org="com.ribomation" name="droidAtScreen" rev="0.5.1" />-->
+	</dependencies>
+</ivy-module>
