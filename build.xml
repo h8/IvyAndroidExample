@@ -4,6 +4,7 @@
 	<property file="ant.properties" />
 	<loadproperties srcFile="project.properties" />
 
+	<!-- version-tag: custom -->
 	<import file="${sdk.dir}/tools/ant/build.xml" />
 
 	<target name="-pre-build" depends="resolve" />
