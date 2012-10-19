@@ -10,6 +10,6 @@
 	<target name="-pre-build" depends="resolve" />
 
 	<target name="resolve" description="--> retrieve dependencies with ivy">
-		<ivy:retrieve />
+		<ivy:retrieve pattern="${jar.libs.dir}/[artifact](-[revision])(-[classifier]).[ext]" />
 	</target>
 </project>
