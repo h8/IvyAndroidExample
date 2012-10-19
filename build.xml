@@ -7,7 +7,11 @@
 	<!-- version-tag: custom -->
 	<import file="${sdk.dir}/tools/ant/build.xml" />
 
-	<target name="-pre-build" depends="resolve" />
+	<target name="-pre-build" depends="resolve">
+		<fileset id="libs.contents" dir="${jar.libs.dir}" />
+		<property name="prop.libs.contents" refid="libs.contents" />
+		<echo>The "${jar.libs.dir}" directory contains: ${prop.libs.contents}</echo>
+	</target>
 
 	<target name="resolve" description="--> retrieve dependencies with ivy">
 		<ivy:retrieve pattern="${jar.libs.dir}/[artifact](-[revision])(-[classifier]).[ext]" />
