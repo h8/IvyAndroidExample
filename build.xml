@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="IvyAndroidExample" default="help">
 	<loadproperties srcFile="local.properties" />
-	<property file="ant.properties" />
 	<loadproperties srcFile="project.properties" />
 
 	<!-- version-tag: custom -->
