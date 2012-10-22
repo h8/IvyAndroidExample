@@ -6,7 +6,7 @@
 	<!-- version-tag: custom -->
 	<import file="${sdk.dir}/tools/ant/build.xml" />
 
-	<target name="-pre-build" depends="retrieve">
+	<target name="-build-setup" depends="retrieve,android_rules.-build-setup">
 		<fileset id="libs.contents" dir="${jar.libs.dir}" />
 		<property name="prop.libs.contents" refid="libs.contents" />
 		<echo>The "${jar.libs.dir}" directory contains: ${prop.libs.contents}</echo>
