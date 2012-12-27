@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:ivy="antlib:org.apache.ivy.ant" name="IvyAndroidExample" default="help">
 	<loadproperties srcFile="local.properties" />
-	<property file="ant.properties" />
 	<loadproperties srcFile="project.properties" />
 
+	<!-- version-tag: custom -->
 	<import file="${sdk.dir}/tools/ant/build.xml" />
 
-	<target name="-pre-build" depends="resolve" />
+	<target name="-build-setup" depends="retrieve,android_rules.-build-setup">
+		<fileset id="libs.contents" dir="${jar.libs.dir}" />
+		<property name="prop.libs.contents" refid="libs.contents" />
+		<echo>The "${jar.libs.dir}" directory contains: ${prop.libs.contents}</echo>
+	</target>
 
-	<target name="resolve" description="--> retrieve dependencies with ivy">
-		<ivy:retrieve />
+	<property name="ivy.install.version" value="2.3.0-rc1" />
+	<condition property="ivy.home" value="${env.IVY_HOME}">
+		<isset property="env.IVY_HOME" />
+	</condition>
+	<property name="ivy.home" value="${user.home}/.ant" />
+	<property name="ivy.jar.dir" value="${ivy.home}/lib" />
+	<property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
+
+	<target name="-download-ivy">
+		<mkdir dir="${ivy.jar.dir}" />
+		<get src="http://repo2.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar" dest="${ivy.jar.file}" usetimestamp="true" />
+	</target>
+
+	<target name="-init-ivy" depends="-download-ivy">
+		<path id="ivy.lib.path">
+			<fileset dir="${ivy.jar.dir}" includes="*.jar" />
+		</path>
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path" />
+	</target>
+
+	<target name="retrieve" depends="-init-ivy" description="--> retrieve dependencies with ivy">
+		<ivy:retrieve pattern="${jar.libs.dir}/[artifact](-[revision])(-[classifier]).[ext]" />
 	</target>
 </project>
